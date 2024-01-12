@@ -286,3 +286,89 @@ function longestCommonPrefix(strs) {
   }
   return commonPrefix;
 }
+
+//spiralmatrix
+function spiralMatrixII(n) {
+  //create an array with n elements, and then fill each elements with another array of n elements
+  let spiralMatrix = new Array(n).fill(0).map(() => new Array(n).fill(0));
+
+  //initiate the counter
+  let counter = 1;
+
+  //initaite the rows/column of the arrays
+  let top = 0,
+    bottom = n - 1,
+    left = 0,
+    right = n - 1;
+
+  //run throught the loops untill all the required numbers are printed
+  while (counter <= n * n) {
+    //fill the top row
+    for (let i = left; i <= right; i++) {
+      spiralMatrix[top][i] = counter;
+      counter++;
+    }
+    top++;
+    //fill the right column
+    for (let i = top; i <= bottom; i++) {
+      spiralMatrix[i][right] = counter;
+      counter++;
+    }
+    right--;
+    //fill the bottom row
+    for (let i = right; i >= left; i--) {
+      spiralMatrix[bottom][i] = counter;
+      counter++;
+    }
+    bottom--;
+    // fill the left most
+    for (let i = bottom; i >= top; i--) {
+      spiralMatrix[i][left] = counter;
+      counter++;
+    }
+    left++;
+  }
+
+  return spiralMatrix;
+}
+
+function incrementNumber(N, A) {
+  //reverse the array
+  A.reverse();
+  //initialize carry forward value
+  let carry = 1;
+
+  for (let i = 0; i < A.length; i++) {
+    let sum = A[i] + carry;
+
+    //taking only the units place if the sum is double digit
+    A[i] = sum % 10;
+    //repplace the tens place digit with carry to add it to next number in array
+    carry = Math.floor(sum / 10);
+  }
+
+  //if carry is available after the for loop is complete add it to the last of the array
+  if (carry) {
+    A.push(carry);
+  }
+  //reverse the current array
+  A.reverse();
+  return A;
+}
+
+function bestTimeToBuyAndSellStocks(prices) {
+  //initalize totalprofit variable
+  let totalProfit = 0;
+
+  // loop to check if the current value id greater or less than next day value
+  for (let i = 0; i < prices.length; i++) {
+    //if the current value is less than next day value add difference to total profit
+    if (prices[i] < prices[i + 1]) {
+      totalProfit += prices[i + 1] - prices[i];
+    } else {
+      //if the current value is greater than next day value add 0 to total profit
+      totalProfit += 0;
+    }
+  }
+  return totalProfit;
+}

@@ -1,0 +1,4 @@
+*print matrix in spiral order
+*Increment number passed as array
+*Find the maximum profit by buying and selling stocks optimally
+*rotate image by 90deg 
